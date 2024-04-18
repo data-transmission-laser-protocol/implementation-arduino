@@ -31,6 +31,8 @@ During development the code was ran and tested on the following hardware:
 ### Speed & Optimization
 The source code needs to be improved and optimized. Beside it the receiver should be tested with photodiode. Current speed is 1bit per 70ms (it's a min rate for digital photoresistor), that's it ~0.0015kbit/sec which is awful.
 
+### TODOs
+- Cannot force Arduino IDE 2 to show the example from the lib after lib installation. Make examples visible in Examples section in the IDE after lib installation.
 
 ### Licence 
 This software is under the CC BY-NC-ND 4.0 licence. For more info see: https://github.com/data-transmission-laser-protocol/implementation-arduino/blob/master/LICENCE

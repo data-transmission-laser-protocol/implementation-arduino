@@ -33,6 +33,7 @@ void DtlpTransmitter::sendTextAsBinary(String text) {
     digitalWrite(_transmitterLaserPin, LOW);
 }
 
-void DtlpTransmitter::setTransmitterLaserPin(const unsigned int pin) {
-    _transmitterLaserPin = pin;
+void DtlpTransmitter::initTransmitter(const DtlpTransmitterConfig dtlpTransmitterConfig) {
+    _transmitterLaserPin = dtlpTransmitterConfig.transmitterLaserPin;
+    _bitDurationMilliseconds = dtlpTransmitterConfig.bitDurationMilliseconds;
 }

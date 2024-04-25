@@ -3,6 +3,10 @@
 #ifndef DTLP_RECEIVER_H
 #define DTLP_RECEIVER_H
 
+typedef struct {
+    uint8_t bitDurationMilliseconds;
+} DtlpReceiverConfig;
+
 class DtlpReceiver {
 public:
   enum ConnectionStatus {
@@ -11,16 +15,16 @@ public:
     INACTIVE_CONNECTION
   };
   
-  void handleProcessorInterator(const unsigned int signalValue);
-  unsigned int status();
+  void handleProcessorInterator(const uint8_t signalValue);
+  void initReceiver(const DtlpReceiverConfig dtlpReceiverConfig);
+
+  uint8_t status();
   String getReceivedData();
 
-  DtlpReceiver();
-
-
 private:
-  const unsigned long _handshakeSignalMilliseconds = 100;
-  const unsigned int _bitDurationMilliseconds = 70;
+  const uint8_t _handshakeSignalMilliseconds = 100;
+  uint8_t _bitDurationMilliseconds = 30;
+
   unsigned long _startSignalProcessingStartedAt;
   bool _processingStartSignal;
   bool _inActiveConnection;

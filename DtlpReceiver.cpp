@@ -1,10 +1,6 @@
 
 #include "DtlpReceiver.h"
 
-DtlpReceiver::DtlpReceiver() {
-  _initVars();
-}
-
 void DtlpReceiver::_initVars() {
   _startSignalProcessingStartedAt = 0;
   _processingStartSignal = false;
@@ -47,7 +43,7 @@ String DtlpReceiver::_binaryToAscii(String binaryString) {
   String result = "";
 
   // Loop through the binary string, parsing 8 characters at a time
-  for (int i = 0; i < binaryString.length(); i += 8) {
+  for (unsigned int i = 0; i < binaryString.length(); i += 8) {
     String byteString = binaryString.substring(i, i + 8);
     char byte = strtol(byteString.c_str(), NULL, 2);  // Convert binary string to char
 
@@ -57,7 +53,7 @@ String DtlpReceiver::_binaryToAscii(String binaryString) {
   return result;
 }
 
-void DtlpReceiver::handleProcessorInterator(const unsigned int signalValue) {
+void DtlpReceiver::handleProcessorInterator(const uint8_t signalValue) {
   if (!_inActiveConnection) {
     if (signalValue) {
       if (!_processingStartSignal) {
@@ -81,10 +77,15 @@ void DtlpReceiver::handleProcessorInterator(const unsigned int signalValue) {
   }
 }
 
-unsigned int DtlpReceiver::status() {
+uint8_t DtlpReceiver::status() {
   return _receiverStatus;
 }
 
 String DtlpReceiver::getReceivedData() {
   return _lastReceivedData;
+}
+
+void DtlpReceiver::initReceiver(const DtlpReceiverConfig dtlpReceiverConfig) {
+  _bitDurationMilliseconds = dtlpReceiverConfig.bitDurationMilliseconds;
+  _initVars();
 }

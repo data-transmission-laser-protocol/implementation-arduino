@@ -18,6 +18,7 @@ To be informed about upcoming versions and features of the protocol see: https:/
 
 ### Tests 
 During development the code was ran and tested on the following hardware:
+
 ##### Boards
 - Arduino UNO
 - ESP32 Cam AI Thinker
@@ -26,13 +27,13 @@ During development the code was ran and tested on the following hardware:
 - Laser KY-008
 
 ##### Receiver Hardware
-- Photoresistor KY-018
-
-### Speed & Optimization
-The source code needs to be improved and optimized. Beside it the receiver should be tested with photodiode. Current speed is 1bit per 70ms (it's a min rate for digital photoresistor), that's it ~0.0015kbit/sec which is awful.
+- Photoresistor KY-018 (max speed 70ms per bit)
+- Photodiode of Flyingfish IR Sensor (black diode) (max speed 30ms per bit)
+- Photodiode DS18B20 (max speed 30ms per bit)
 
 ### TODOs
 - Cannot force Arduino IDE 2 to show the example from the lib after lib installation. Make examples visible in Examples section in the IDE after lib installation.
+- Work on speed
 
 ### Licence 
 This software is under the CC BY-NC-ND 4.0 licence. For more info see: https://github.com/data-transmission-laser-protocol/implementation-arduino/blob/master/LICENCE

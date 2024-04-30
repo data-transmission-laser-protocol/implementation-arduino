@@ -89,3 +89,7 @@ void DtlpReceiver::initReceiver(const DtlpReceiverConfig dtlpReceiverConfig) {
   _bitDurationMilliseconds = dtlpReceiverConfig.bitDurationMilliseconds;
   _initVars();
 }
+
+String DtlpReceiver::decryptAndGetReceivedData(const EncryptionAlgo algo, const String key) {
+  return _encryptor->decrypt(_lastReceivedData, algo, key);
+}

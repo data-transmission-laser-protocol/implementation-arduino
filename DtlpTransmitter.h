@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include "EncryptionAlgo.h"
+#include "Encryptor.h"
 
 #ifndef DTLP_TRANSMITTER_H
 #define DTLP_TRANSMITTER_H
@@ -10,13 +12,14 @@ typedef struct {
 
 class DtlpTransmitter {
 public:
-    void sendTextAsBinary(String text);
+    void sendTextAsBinary(const String text);
+    void encryptAndSendTextAsBinary(const String text, const EncryptionAlgo algo, const String key);
     void initTransmitter(const DtlpTransmitterConfig dtlpTransmitterConfig);
 
 private:
     const uint8_t _handshakeSignalMilliseconds = 100;
+    Encryptor* _encryptor = new Encryptor;
     uint8_t _bitDurationMilliseconds = 30;
-
     unsigned int _transmitterLaserPin;
 
     void _sendHandshakeSignal();

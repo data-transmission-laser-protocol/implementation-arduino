@@ -6,7 +6,10 @@
 DtlpReceiver dtlpReceiver;
 DtlpReceiverConfig config;
 
-uint8_t lastStatus = dtlpReceiver.INACTIVE_CONNECTION;
+// Define your secret key for decryption
+const String key = "TYPE_YOUR_KEY_HERE";
+
+uint8_t lastStatus = ConnectionStatus::INACTIVE_CONNECTION;
 
 void turnOnLed() {
   digitalWrite(LED_PIN, HIGH);
@@ -36,11 +39,11 @@ void loop() {
   if (lastStatus != status) {
     lastStatus = status;
 
-    if (lastStatus == dtlpReceiver.INACTIVE_CONNECTION) {
-      Serial.println("Received: " + dtlpReceiver.getReceivedData());
+    if (lastStatus == ConnectionStatus::INACTIVE_CONNECTION) {
+      Serial.println("Received: " + dtlpReceiver.decryptAndGetReceivedData(EncryptionAlgo::XOR, key));
       Serial.println("Connection Deactivated");
       turnOffLed();
-    } else if (lastStatus == dtlpReceiver.PROCESSING_HANDSHAKE_SIGNAL) {
+    } else if (lastStatus == ConnectionStatus::PROCESSING_HANDSHAKE_SIGNAL) {
       Serial.println("Processing Handshake Signal");
     } else {
       Serial.println("Processing Incoming Data...");

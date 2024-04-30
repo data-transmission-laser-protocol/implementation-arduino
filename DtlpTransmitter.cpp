@@ -7,12 +7,12 @@ void DtlpTransmitter::_sendHandshakeSignal() {
     digitalWrite(_transmitterLaserPin, LOW);
 }
 
-void DtlpTransmitter::sendTextAsBinary(String text) {
+void DtlpTransmitter::sendTextAsBinary(const String text) {
     const unsigned int textLength = text.length();
 
     _sendHandshakeSignal();
 
-    for (int i = 0; i < textLength; i++) {
+    for (unsigned int i = 0; i < textLength; i++) {
         char c = text.charAt(i);
         byte b = c;
 
@@ -36,4 +36,8 @@ void DtlpTransmitter::sendTextAsBinary(String text) {
 void DtlpTransmitter::initTransmitter(const DtlpTransmitterConfig dtlpTransmitterConfig) {
     _transmitterLaserPin = dtlpTransmitterConfig.transmitterLaserPin;
     _bitDurationMilliseconds = dtlpTransmitterConfig.bitDurationMilliseconds;
+}
+
+void DtlpTransmitter::encryptAndSendTextAsBinary(const String text, const EncryptionAlgo algo, const String key) {
+    sendTextAsBinary(_encryptor->encrypt(text, algo, key));
 }

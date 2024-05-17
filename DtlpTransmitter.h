@@ -7,7 +7,7 @@
 
 typedef struct {
     uint8_t bitDurationMilliseconds;
-    uint8_t transmitterLaserPin;
+    uint8_t transmittersPins[8];
 } DtlpTransmitterConfig;
 
 class DtlpTransmitter {
@@ -20,9 +20,10 @@ private:
     const uint8_t _handshakeSignalMilliseconds = 100;
     Encryptor* _encryptor = new Encryptor;
     uint8_t _bitDurationMilliseconds = 30;
-    unsigned int _transmitterLaserPin;
+    uint8_t _transmittersPins[8];
 
     void _sendHandshakeSignal();
+    byte* _textToBin(const String& s);
 };
 
 #endif
